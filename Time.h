@@ -3,12 +3,6 @@
 using namespace std;
 
 class Time : public Triad {
-private:
-
-	int hour;
-	int minute;
-	int seconds;
-
 public:
 
 	Time(void);

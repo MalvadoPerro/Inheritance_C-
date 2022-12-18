@@ -1,91 +1,87 @@
 #include "Time.h"
 #include <string>
 
-Time::Time(void) : hour(0), minute(0), seconds(0) {}
+Time::Time(void) : Triad() {}
 
-Time::Time(int a, int b, int c) {
-	hour = a;
-	minute = b;
-	seconds = c;
-}
+Time::Time(int a, int b, int c) : Triad(a, b, c) {}
 
 void Time::set_first(int first) {
-	hour = first;
+	X = first;
 }
 
 int Time::get_first() {
-	return hour;
+	return X;
 }
 
 void Time::set_second(int second) {
-	minute = second;
+	Y = second;
 }
 
 int Time::get_second() {
-	return minute;
+	return Y;
 }
 
 void Time::set_third(int third) {
-	seconds = third;
+	Z = third;
 }
 
 int Time::get_third() {
-	return seconds;
+	return Z;
 }
 
 void Time::add_first() {
-	hour++;
+	X++;
 }
 
 void Time::add_second() {
-	minute++;
+	Y++;
 }
 
 void Time::add_third() {
-	seconds++;
+	Z++;
 }
 
 void Time::add_seconds(int third) {
-	seconds += third;
+	Z += third;
 }
 
 void Time::add_minute(int second) {
-	minute += second;
+	Y += second;
 }
 
 void Time::normalize_time() {
-	if (seconds >= 60) {
-		minute += seconds / 60;
-		seconds %= 60;
+	if (Z >= 60) {
+		Y += Z / 60;
+		Z %= 60;
 	}
-	if (minute >= 60) {
-		hour += minute / 60;
-		minute %= 60;
+	if (Y >= 60) {
+		X += Y / 60;
+		Y %= 60;
 	}
-	if (hour >= 24) {
-		hour %= 24;
+	if (X >= 24) {
+		X %= 24;
 	}
 }
 
 void Time::get_time() {
-	cout << hour << ":" << minute << ":" << seconds << endl;
+	cout << X << ":" << Y << ":" << Z << endl;
 }
 
 ostream& operator<<(ostream& out, Time& d) {
-	out << "Hour = " << d.hour << endl;
-	out << "Minute = " << d.minute << endl;
-	out << "Seconds = " << d.seconds << endl;
+	out << "Hour = " << d.X << endl;
+	out << "Minute = " << d.Y << endl;
+	out << "Seconds = " << d.Z << endl;
 	return out;
 }
 
 istream& operator>>(istream& in, Time& d) {
-	in >> d.hour;
-	in >> d.minute;
-	in >> d.seconds;
+	in >> d.X;
+	in >> d.Y;
+	in >> d.Z;
 	return in;
 }
 
 string Time::toString() {
-	string s = "Hour: " + to_string(hour) + ". Minute: " + to_string(minute) + ". Seconds: " + to_string(seconds) + ".";
+	string s = "Hour: " + to_string(X) + ". Minute: " + to_string(Y) + ". Seconds: " + to_string(Z) + ".";
 	return s;
 }
